@@ -16,8 +16,10 @@ class CreateSectionsTable extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('slug');
             $table->string('description')->nullable();
-            $table->string('head');
+            $table->string('head')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

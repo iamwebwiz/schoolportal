@@ -25,10 +25,12 @@ class CreateStaffTable extends Migration
             $table->longText('qualifications');
             $table->string('staffType')->nullable();
             $table->string('status')->nullable();
+            $table->date('dateOfEmployment');
             $table->string('designation')->nullable();
-            $table->string('section')->nullable();
+            $table->integer('section_id')->nullable();
             $table->string('phone');
             $table->integer('user_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

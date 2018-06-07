@@ -24,6 +24,7 @@ class CreateStudentsTable extends Migration
             $table->integer('parent_id')->nullable();
             $table->string('parentRelationship')->nullable();
             $table->string('status')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

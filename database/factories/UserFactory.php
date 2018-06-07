@@ -56,8 +56,9 @@ $factory->define(App\Staff::class, function(Faker $faker) {
     'address'=>$faker->address,
     'email'=>$faker->unique()->safeEmail,
     'dateOfBirth'=>$faker->date($format='Y-m-d', $max = 'now'),
+    'dateOfEmployment'=>$faker->date($format='Y-m-d', $max = 'now'),
     'qualifications'=>$faker->realText,
-  'phone'=>$faker->phoneNumber,
+    'phone'=>$faker->phoneNumber,
     ];
 });
 

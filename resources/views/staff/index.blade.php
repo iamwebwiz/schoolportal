@@ -22,14 +22,25 @@
                     </thead>
                     <tbody>
                     @foreach($staff as $staff)
-                      {{--  <tr class='clickable-row' data-href="{{ route('staff.show', ['id' => $staff->id])}}">  --}}
-                      <tr>
-                        <td>{{$staff->image}}</td>
+                      <tr class='clickable-row' data-href="{{ route('staff.show', ['id' => $staff->id])}}">
+                        <td>
+                        @if ($staff->image)
+                        <img src="{{$staff->image}}" alt="{{$staff->fullName}}" width="100px">               
+                        @else
+                        <img src="{{asset('images/avatar.png')}}" alt="{{$staff->fullName}}" width="100px">  
+                        @endif
+                         </td>
                         <td>{{$staff->fullName}}</td>
                         <td>{{$staff->gender}}</td>
                         <td>{{$staff->designation}}</td>
                         <td>{{$staff->staffType}}</td>
-                        <td>{{$staff->section}}</td>
+                        <td>
+                        <ul class="list-group">
+                        @foreach($staff->sections as $section)
+                        <li class="list-group-item">
+                        {{$section->name}}</li>
+                        @endforeach
+                        </ul></td>
                         <td>{{$staff->status}}</td>
                         <td> 
                         <div class="row">
@@ -52,13 +63,6 @@
     </div>
     </div>
 
-     {{--  <script> 
-                jQuery(document).ready(function($) {
-                    $(".clickable-row").click(function() {
-                        window.location = $(this).data("href");
-                    });
-                });
-                </script>  --}}
     @else 
 
     <h3>No Staff added yet.</h3><br>

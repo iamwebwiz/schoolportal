@@ -1,4 +1,5 @@
 <div class="breadcrumbs">
+    <div class="row">
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
@@ -15,4 +16,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
+    <div class="container row">
+    @if(count($errors) > 0)
+    @foreach ($errors->all() as $error)
+    <div class="alert alert-danger">
+    {{$error}}
+    </div>
+    @endforeach
+    @endif
+    </div>
+</div>

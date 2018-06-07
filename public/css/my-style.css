@@ -1,0 +1,14 @@
+.clickable-row {
+  cursor: pointer;
+}
+.clickable-row:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: bold;
+}
+
+.row > .detail-display {
+  font: bold;
+  color: #0000;
+  font-size: 1.4em;
+}

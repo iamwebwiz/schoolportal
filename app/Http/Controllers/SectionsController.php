@@ -40,12 +40,12 @@ class SectionsController extends Controller
     {
         
         $this->validate($request, [
-            'name'=>'required|min:2',
-            'head'=>'required|min:2'
+            'name'=>'required|min:2'
         ]);
 
         $section =  Section::create([
             'name'=> $request->name,
+            'slug'=>str_slug($request->name),
             'description'=>$request->description,
             'head'=>$request->head
         ]);
@@ -97,6 +97,7 @@ class SectionsController extends Controller
         $section = Section::find($id);
 
         $section->name = $request->name;
+        $section->slug =str_slug($request->name);
         $section->description = $request->description;
         $section->head = $request->head;
 
@@ -115,8 +116,10 @@ class SectionsController extends Controller
      */
     public function destroy($id)
     {
-        Section::destroy($id);
-        Session::flash('success', 'Section Deleted Successfuly');
+        // Section::destroy($id);
+        $section = Section::find($id);
+        $section->delete();
+        Session::flash('success', 'Section has been successfully trashed');
         return redirect()->back();
     }
 }
