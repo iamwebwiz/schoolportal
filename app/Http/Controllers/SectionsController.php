@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Session;
 use App\Section;
+use App\Staff;
+use App\Student;
 use Illuminate\Http\Request;
 
 class SectionsController extends Controller
@@ -16,8 +18,9 @@ class SectionsController extends Controller
     public function index()
     {
         $sections = Section::all();
+        $staffs = Staff::all();
 
-        return view('sections.index')->with('sections', $sections);
+        return view('sections.index')->with('sections', $sections)->with('staffs', $staffs)->with('students', Student::all());
     }
 
     /**

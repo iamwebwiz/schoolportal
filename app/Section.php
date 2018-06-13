@@ -12,7 +12,15 @@ class Section extends Model
     protected $fillable = ['name','slug', 'description', 'head'];
 
     public function staffs(){
-        return $this->belongsToMany(App\Staff);
+        return $this->belongsToMany('App\Staff');
     }
+
+    public function students() {
+        return $this->hasMany('App\Student');
+    }
+    
+    public function schoolclasses() {
+        return $this->hasMany('App\Schoolclass');
+    }   
 
 }

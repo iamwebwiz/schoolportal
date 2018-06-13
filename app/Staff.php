@@ -14,4 +14,8 @@ class Staff extends Model
     public function sections(){
         return $this->belongsToMany('App\Section');
     }
+
+    public function schoolclasses() {
+        return $this->belongsToMany('App\Schoolclass');
+    }
 }

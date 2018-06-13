@@ -20,9 +20,10 @@ class CreateStudentsTable extends Migration
             $table->string('gender');
             $table->date('dateOfBirth');
             $table->date('admissionDate');
-            $table->text('peculiarities');
+            $table->text('peculiarities')->nullable();
             $table->integer('parent_id')->nullable();
             $table->string('parentRelationship')->nullable();
+            $table->integer('section_id')->nullable();
             $table->string('status')->nullable();
             $table->softDeletes();
             $table->timestamps();

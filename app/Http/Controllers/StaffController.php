@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Session;
 use App\Staff;
+use App\Sponsors;
 use App\Section;
 use Illuminate\Http\Request;
 
@@ -29,6 +30,7 @@ class StaffController extends Controller
     public function create()
     {
         $sections = Section::all();
+
         if($sections->count() == 0){
             Session::flash('info', 'You must have created School Sections before attmepting to create Staff Pofile');
             return redirect()->back();
@@ -105,7 +107,7 @@ class StaffController extends Controller
     public function show($id)
     {
         $staff = Staff::find($id);
-        return view('staff.show')->with('staff', $staff);
+        return view('staff.show')->with('staff', $staff)->with('sections', Section::all());
     }
 
     /**
@@ -174,9 +176,9 @@ class StaffController extends Controller
         $staff->save();
         $staff->sections()->sync($request->sections);
 
-        Session::flash('success', 'Staff Profile  for ' . $staff->fullName . ' has been edited!');
+        Session::flash('success', 'Staff Profile  for ' . $staff->fullName . ' has been updated!');
 
-        return redirect()->route('staff.index');
+        return redirect()->route('staff.show', ['id' => $staff->id]);
     }
 
     /**
@@ -187,6 +189,11 @@ class StaffController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $staff = Staff::find($id);
+        $staff->delete();
+
+        Session::flash('success', 'Staff profile has been deleted successfully');
+
+        return redirect()->route('staff.index');
     }
 }

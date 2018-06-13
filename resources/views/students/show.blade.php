@@ -10,7 +10,7 @@
                     <p>Full Name :</p>
                 </div>
                 <div class="col-md-8 detail-display">
-                    <p>{{$staff->title}} {{$staff->fullName}} </p>
+                    <p>{{$student->fullName}} </p>
                 </div>
             </div>
             <div class="row">
@@ -18,7 +18,7 @@
                     <p>Address :</p>
                 </div>
                 <div class="col-md-8 detail-display">
-                    <p>{{$staff->address}}</p>
+                    <p>{{$student->address}}</p>
                 </div>
             </div>
              <div class="row">
@@ -26,45 +26,36 @@
                     <p>Date of Birth :</p>
                 </div>
                 <div class="col-md-8 detail-display">
-                    <p>{{$staff->dateOfBirth}}</p>
+                    <p>{{$student->dateOfBirth}}</p>
+                </div>
+            </div>
+                <div class="row">
+                <div class="col-md-4">
+                    <p>Date of Admission :</p>
+                </div>
+                <div class="col-md-8 detail-display">
+                    <p>{{$student->dateOfAdmission}}</p>
+                </div>
+            </div>
+
+             <div class="row">
+                <div class="col-md-4">
+                    <p>Peculiarities :</p>
+                </div>
+                <div class="col-md-8 detail-display">
+                    <p>{{$student->peculiarities}}</p>
                 </div>
             </div>
              <div class="row">
                 <div class="col-md-4">
-                    <p>Designation :</p>
+                    <p>Parents :</p>
                 </div>
                 <div class="col-md-8 detail-display">
-                    <p>{{$staff->designation}}</p>
+                <p>Parents</p>
+                <br><p>Relationship</p>
                 </div>
             </div>
-             <div class="row">
-                <div class="col-md-4">
-                    <p>Date Employed :</p>
-                </div>
-                <div class="col-md-8 detail-display">
-                    <p>{{$staff->dateOfEmployment}}</p>
-                </div>
-            </div>
-             <div class="row">
-                <div class="col-md-4">
-                    <p>Qualifications :</p>
-                </div>
-                <div class="col-md-8 detail-display">
-                    <p>{{$staff->qualifications}}</p>
-                </div>
-            </div>
-        @if( $staff->designation =='Teacher' &&  $staff->status =='active')
-             <div class="row">
-                <div class="col-md-4">
-                    <p>Class :</p>
-                </div>
-                <div class="col-md-8 detail-display">
-                <p>Class handled</p>
-                </div>
-            </div>
-        @else
-        @endif
-        </div>
+    </div>
         </div>
         </div>
         <div class="col-md-5">
@@ -74,32 +65,32 @@
                             </div>
                             <div class="card-body">
                                 <div class="mx-auto d-block">
-                                @if ($staff->image)
-                                    <img class="rounded-circle mx-auto d-block" src="{{asset($staff->image)}}" alt="{{$staff->fullName}}" width="300px">               
+                                @if ($student->image)
+                                    <img class="rounded-circle mx-auto d-block" src="{{asset($student->image)}}" alt="{{$student->fullName}}" width="300px">
                                     @else
-                                    <img class="rounded-circle mx-auto d-block" src="{{asset('images/avatar.png')}}" alt="{{$staff->fullName}}" width="300px">  
+                                    <img class="rounded-circle mx-auto d-block" src="{{asset('images/avatar.png')}}" alt="{{$student->fullName}}" width="300px">
                                     @endif
-                                    <h5 class="text-sm-center mt-2 mb-1">{{$staff->fullName}}</h5>
-                                    <div class="location text-sm-center"><i class="fa fa-user"></i>({{$staff->gender}}) {{$staff->designation}} - <i>{{$staff->status}}</i> <br>
-                                    @foreach($staff->sections as $section)
-                                    <a href="{{$section->id}}">
-                                    {{$section->name}} <br>
-                                    </a>
-                                    @endforeach
+                                    <h5 class="text-sm-center mt-2 mb-1">{{$student->fullName}}</h5>
+                                    <div class="location text-sm-center"><i class="fa fa-user"></i>({{$student->gender}}) School Class - <i>{{$student->status}}</i> <br>
+                                    @if($student->section)
+                                    <a href="{{ route('sections.show', ['id' => $student->section->id])}}">{{ $student->section->name }}</a>
+                                    @else
+                                    <a href="{{route('students.edit', ['id' => $student->id])}}">Please add School Section</a>
+                                    @endif
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="card-text text-sm-center">
-                                    {{$staff->phone}} <br>
-                                    {{$staff->email}}
+                                   Parent phone <br>
+                                    Parent email
                                 </div>
-                                
+
                                 <div class="card-text text-sm-center mt-3">
-                                    <a class="btn btn-info btn-block" href="{{ route('staff.edit', ['id' => $staff->id])}}">Edit Staff Profile</a><br>
-                                    <form action="{{ route('staff.destroy', ['id' => $staff->id])}}" method="POST">
+                                    <a class="btn btn-info btn-block" href="{{ route('students.edit', ['id' => $student->id])}}">Edit student Profile</a><br>
+                                    <form action="{{ route('students.destroy', ['id' => $student->id])}}" method="POST">
                                         {{ csrf_field()}}
                                         {{ method_field('DELETE')}}
-                                        <a class="btn btn-danger btn-block">Delete Staff Profile</a>
+                                        <a class="btn btn-danger btn-block">Delete student Profile</a>
                                     </form>
                                 </div>
                             </div>
@@ -111,5 +102,5 @@
 
 
 @section('page-title')
-    Staff Profile - {{$staff->fullName}}
+    Student Profile - {{$student->fullName}}
 @endsection

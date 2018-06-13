@@ -23,7 +23,7 @@
                         <td>{{$section->name}}</td>
                         <td>{{$section->description}}</td>
                         <td>{{$section->head}}</td>
-                        <td>32,800</td>
+                        <td>{{$section->students->count()}}</td>
                         <td> 
                         <div class="row">
                         <a href="{{ route('sections.show', ['id' => $section->id])}}" class="btn btn-sm btn-info">Edit</a>  
@@ -76,7 +76,14 @@
                           </div>
                           <div class="row form-group">
                             <div class="col col-md-3"><label for="head" class=" form-control-label">Section head</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="head" name="head" placeholder="Enter Section head..." class="form-control"></div>
+                            <div class="col-12 col-md-9">
+                            <select name="head" class="form-control" id="">
+                            <option value="Select Section head"></option>
+                            @foreach ($staffs as $staff)
+                            <option value="{{$staff->fullName}}">{{$staff->fullName}}</option>
+                            @endforeach
+                            </select>
+                            </div>
                           </div>
                           </div>
                             <div class="modal-footer">

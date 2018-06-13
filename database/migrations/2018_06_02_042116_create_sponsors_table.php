@@ -23,6 +23,7 @@ class CreateSponsorsTable extends Migration
             $table->string('occupation');
             $table->string('phone');
             $table->integer('user_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

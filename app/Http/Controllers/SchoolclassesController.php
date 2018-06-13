@@ -2,6 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Session;
+use App\Schoolclass;
+use App\Section;
+use App\Staff;
+use App\Setting;
+use App\Sessionsetting;
+
 use Illuminate\Http\Request;
 
 class SchoolclassesController extends Controller
@@ -13,7 +20,12 @@ class SchoolclassesController extends Controller
      */
     public function index()
     {
-        //
+        $schoolclasses = Schoolclass::all();
+        $staff = Staff::all();
+        $section = Section::all();
+        $session = Sessionsetting::all();
+
+        return view('schoolclass.index')->with('schoolclasses', $schoolclasses)->with('staff', $staff)->with('section', $section)->with('session', $session);
     }
 
     /**
@@ -22,8 +34,15 @@ class SchoolclassesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        if(Section::all()->count() == 0 || Sessionsetting::all()->count() == 0 || Staff::all()->count() == 0) {
+            Session::flash('info', 'You must have created School Section, Academic Session and Staff Profile before adding Class');
+            return redirect()->back();
+        }
+
+        $staff = Staff::where('staffType', 'staff')->get();
+       return view('schoolclass.create')->with('sections', Section::all())->with('staff', $staff)->with('sessions', Sessionsetting::all());
+
     }
 
     /**
@@ -34,7 +53,21 @@ class SchoolclassesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'section' => 'required',
+            'name' => 'required'
+        ]);
+        $schoolclass = New Schoolclass;
+
+        $schoolclass->section_id = $request->section;
+        $schoolclass->name = $request->name;
+        $schoolclass->session_id = $request->session;
+
+        $schoolclass->save();
+        $schoolclass->staff()->attach($request->staff);
+
+        Session::flash('success', 'New Class has been added to');
+        return redirect()->route('schoolclass.index');
     }
 
     /**

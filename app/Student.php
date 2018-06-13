@@ -10,4 +10,8 @@ class Student extends Model
     use SoftDeletes;
     protected $dates =['deleted_at'];
     protected $guarded = ['id'];
+
+    public function section() {
+        return $this->belongsTo('App\Section');
+    }
 }

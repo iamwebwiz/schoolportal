@@ -20,7 +20,18 @@
                           </div>
                           <div class="row form-group">
                             <div class="col col-md-3"><label for="head" class=" form-control-label">Section head</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="head" name="head" placeholder="Enter Section head..." class="form-control" value="{{$section->head}}"></div>
+                            <div class="col-12 col-md-9">
+                            <select name="head" class="form-control" id="">
+                            <option value="Select Section head"></option>
+                            @if($section->head)
+                            <option value="{{$section->head}}">{{$section->head}}</option>
+                            @else
+                            <option value="">Choose Section head</option>
+                            @endif
+                            @foreach ($staffs as $staff)
+                            <option value="{{$staff->fullName}}">{{$staff->fullName}}</option>
+                            @endforeach
+                            </select></div>
                           </div>
                           </div>
                                 <button type="submit" class="btn btn-primary">Edit</button>

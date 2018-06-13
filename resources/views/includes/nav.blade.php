@@ -16,11 +16,11 @@
                     </li>
                     <h3 class="menu-title">ACADEMICS</h3><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Classes</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Details</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">Buttons</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Badges</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Tabs</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="#')}}">Classes</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="{{route('subjects.index')}}">Subjects</a></li>
+                            <li><i class="fa fa-bars"></i><a href="{{route('books.index')}}">Books</a></li>
                             <li><i class="fa fa-share-square-o"></i><a href="ui-social-buttons.html">Social Buttons</a></li>
                             <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Cards</a></li>
                             <li><i class="fa fa-exclamation-triangle"></i><a href="ui-alerts.html">Alerts</a></li>
@@ -32,10 +32,10 @@
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Tables</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Students</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
-                            <li><i class="fa fa-table"></i><a href="tables-data.html">Data Table</a></li>
+                            <li><i class="fa fa-table"></i><a href="{{route('students.index')}}">All Students</a></li>
+                            <li><i class="fa fa-table"></i><a href="{{route('students.create')}}">Add New Students</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
@@ -55,15 +55,14 @@
                             <li><i class="menu-icon fa fa-user-plus"></i><a href="{{route('staff.create')}}">New Staff Profile</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="widgets.html"> <i class="menu-icon ti-email"></i>Widgets </a>
-                    </li>
+                    {{--  <li>
+                        <a href="widgets.html"> <i class="menu-icon ti-email"></i>Appraisal </a>
+                    </li>  --}}
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Charts</a>
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Sponsors</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-line-chart"></i><a href="charts-chartjs.html">Chart JS</a></li>
-                            <li><i class="menu-icon fa fa-area-chart"></i><a href="charts-flot.html">Flot Chart</a></li>
-                            <li><i class="menu-icon fa fa-pie-chart"></i><a href="charts-peity.html">Peity Chart</a></li>
+                            <li><i class="menu-icon fa fa-line-chart"></i><a href="{{route('sponsors.index')}}">All Sponsors</a></li>
+                            <li><i class="menu-icon fa fa-line-chart"></i><a href="{{route('sponsors.create')}}">Add New Sponsor</a></li>
                         </ul>
                     </li>
 
@@ -89,7 +88,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>School</a>
                         <ul class="sub-menu children dropdown-menu">
                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ route('sections.index')}}">Sections</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Classes</a></li>
+                           <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ route('sessions.index')}}">Sessions</a></li>
+                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('schoolclass.index')}}">Classes</a></li>
                             <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Subjects</a></li>
                             <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
                         </ul>
@@ -97,8 +97,12 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Users</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Sections</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Classes</a></li>
+                        
+                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ route('sections.index')}}">Sections</a></li>
+
+                            
+                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ route('sessions.index')}}">Sessions</a></li>
+                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('schoolclass.index')}}">Classes</a></li>
                             <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Subjects</a></li>
                             <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
                         </ul>
@@ -106,15 +110,14 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Accounts</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ route('sections.index')}}">Sections</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Classes</a></li>
+                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('schoolclass.index')}}">Classes</a></li>
                             <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Subjects</a></li>
                             <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
                         </ul>
                     </li>
-                    @else if (Auth::user()->status = 'parent')
+                    @else if (Auth::user()->status = 'sponsor')
                      <li class="active">
-                        <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Parent</a>
+                        <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Sponsor</a>
                     </li>
                     @endif
                 </ul>

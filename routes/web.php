@@ -23,5 +23,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware'=>'auth'], function() {
     Route::resource('sections', 'SectionsController');
     Route::resource('staff', 'StaffController');
+    Route::resource('students', 'StudentsController');
+    Route::resource('sponsors', 'SponsorsController');
+    Route::resource('schoolclass', 'SchoolclassesController');
+    Route::resource('books', 'BooksController');
+    Route::resource('subjects', 'SubjectsController');
+    Route::resource('sessions', 'SessionsettingsController');
 });
 

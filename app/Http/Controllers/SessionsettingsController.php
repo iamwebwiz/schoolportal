@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Session;
+use App\Sessionsetting;
 use Illuminate\Http\Request;
 
-class ParentsController extends Controller
+class SessionsettingsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,8 @@ class ParentsController extends Controller
      */
     public function index()
     {
-        //
+        $sessionsettings = Sessionsetting::all();
+        return view('sessionsettings.index')->with('sessionsettings', $sessionsettings);
     }
 
     /**
@@ -34,7 +37,20 @@ class ParentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'session'=> 'required'
+        ]);
+        $session = New Sessionsetting;
+
+        $session->session = $request->session;
+        $session->session_details = $request->session_details;
+
+        $session->save();
+
+        Session::flash('success', "New Session has been added!");
+
+        return redirect()->route('sessions.index');
+
     }
 
     /**
@@ -56,7 +72,9 @@ class ParentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $session = Sessionsetting::find($id);
+        return view('sessionsettings.edit')->with('session', $session);
     }
 
     /**
@@ -68,7 +86,19 @@ class ParentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'session'=> 'required'
+        ]);
+        $session = Sessionsetting::find($id);
+
+        $session->session = $request->session;
+        $session->session_details = $request->session_details;
+
+        $session->save();
+
+        Session::flash('success', "Session has been updated!");
+
+        return redirect()->route('sessions.index');
     }
 
     /**
@@ -79,6 +109,10 @@ class ParentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $session = Sessionsetting::find($id);
+        $session->delete();
+
+        Session::flash('success', 'Session has been deleted');
+        return redirect()->route('sessions.index');
     }
 }
