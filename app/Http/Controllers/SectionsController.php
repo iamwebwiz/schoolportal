@@ -70,7 +70,7 @@ class SectionsController extends Controller
     {
         $section = Section::find($id);
 
-        return view('sections.show')->with('section', $section);
+        return view('sections.show')->with('section', $section)->with('staffs', Staff::all());
     }
 
     /**

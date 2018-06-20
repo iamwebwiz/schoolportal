@@ -12,3 +12,15 @@
   color: #0000;
   font-size: 1.4em;
 }
+
+.list-background {
+  background-color: rgba(0, 0, 0, 0);
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+
+table,tr,td{
+  border:1px solid red;
+  
+  }

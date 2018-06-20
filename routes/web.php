@@ -25,9 +25,18 @@ Route::group(['middleware'=>'auth'], function() {
     Route::resource('staff', 'StaffController');
     Route::resource('students', 'StudentsController');
     Route::resource('sponsors', 'SponsorsController');
+    Route::get('/schoolclass/addstudents/{id}', [
+        'uses' => 'SchoolclassesController@addstudent',
+        'as' => 'schoolclass.addstudents'
+    ]); 
+    Route::put('/schoolclass/storestudents/{id}', [
+        'uses' => 'SchoolclassesController@storestudent',
+        'as' => 'schoolclass.storestudents'
+    ]); 
     Route::resource('schoolclass', 'SchoolclassesController');
     Route::resource('books', 'BooksController');
     Route::resource('subjects', 'SubjectsController');
     Route::resource('sessions', 'SessionsettingsController');
+    Route::resource('users', 'UsersController');
 });
 

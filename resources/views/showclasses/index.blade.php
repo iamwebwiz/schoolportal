@@ -37,7 +37,7 @@
                         <td>
                         {{--  {{$schoolclass->students->count()}}  --}}
                         </td>
-                        <td><a href="{{ route('schoolclass.show', ['id' => $schoolclass->id])}}" class="btn btn-info btn-xs">View Class <br>  Details</a></td>
+                        <td><a href="{{ route('schoolclass.show', ['id' => $schoolclass->id])}}" class="btn btn-info btn-xs">View Class Details</a></td>
                         <td>
                         <div class="row">
                         &nbsp;&nbsp;

@@ -18,4 +18,7 @@ class Staff extends Model
     public function schoolclasses() {
         return $this->belongsToMany('App\Schoolclass');
     }
+    public function users(){
+        return $this->hasOne('App\User');
+    }
 }

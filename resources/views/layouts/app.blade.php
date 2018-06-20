@@ -112,5 +112,9 @@
                     });
                 });
                 </script>
+
+    <script type="text/javascript">
+        @yield ('scripts')
+    </script>
 </body>
 </html>

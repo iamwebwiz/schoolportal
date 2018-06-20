@@ -8,6 +8,7 @@ use App\Section;
 use App\Staff;
 use App\Setting;
 use App\Sessionsetting;
+use App\Student;
 
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class SchoolclassesController extends Controller
         $section = Section::all();
         $session = Sessionsetting::all();
 
-        return view('schoolclass.index')->with('schoolclasses', $schoolclasses)->with('staff', $staff)->with('section', $section)->with('session', $session);
+        return view('schoolclass.index')->with('schoolclasses', $schoolclasses)->with('staff', $staff)->with('section', $section)->with('session', $session)->with('students', Student::all());
     }
 
     /**
@@ -40,7 +41,10 @@ class SchoolclassesController extends Controller
             return redirect()->back();
         }
 
-        $staff = Staff::where('staffType', 'staff')->get();
+        $staff = Staff::where([
+            ['staffType', 'staff'],
+            ['status', 'active'],
+            ])->get();
        return view('schoolclass.create')->with('sections', Section::all())->with('staff', $staff)->with('sessions', Sessionsetting::all());
 
     }
@@ -66,7 +70,7 @@ class SchoolclassesController extends Controller
         $schoolclass->save();
         $schoolclass->staff()->attach($request->staff);
 
-        Session::flash('success', 'New Class has been added to');
+        Session::flash('success', 'New Class has been added');
         return redirect()->route('schoolclass.index');
     }
 
@@ -78,7 +82,8 @@ class SchoolclassesController extends Controller
      */
     public function show($id)
     {
-        //
+        $schoolclass = Schoolclass::find($id);
+        return view('schoolclass.show')->with('schoolclass', $schoolclass)->with('sections', Section::all())->with('staff', Staff::all())->with('sessions', Sessionsetting::all());
     }
 
     /**
@@ -89,7 +94,15 @@ class SchoolclassesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $schoolclass = Schoolclass::find($id);
+        
+        $staff = Staff::where([
+            ['staffType', 'staff'],
+            ['status', 'active'],
+            ])->get();
+
+
+        return view('schoolclass.edit')->with('schoolclass', $schoolclass)->with('sections', Section::all())->with('staff', $staff)->with('sessions', Sessionsetting::all());
     }
 
     /**
@@ -101,7 +114,22 @@ class SchoolclassesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'section' => 'required',
+            'name' => 'required'
+        ]);
+        $schoolclass = Schoolclass::find($id);
+
+        $schoolclass->section_id = $request->section;
+        $schoolclass->name = $request->name;
+        $schoolclass->session_id = $request->session;
+
+        $schoolclass->save();
+        $schoolclass->staff()->attach($request->staff);
+
+        Session::flash('success', 'Class has been updated');
+        return redirect()->route('schoolclass.show', ['id'=> $schoolclass->id]);
+
     }
 
     /**
@@ -113,5 +141,43 @@ class SchoolclassesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addstudent($id)
+    {
+        $schoolclass = Schoolclass::find($id);
+       // Find how to display only students from that section. $students = Student::where('section_id', )
+        return view('schoolclass.addstudents')->with('schoolclass', $schoolclass)->with('sections', Section::all())->with('staff', Staff::all())->with('sessions', Sessionsetting::all())->with('students', Student::all());
+    }
+    
+    public function addsubjects($id)
+    {
+        $schoolclass = Schoolclass::find($id);
+       // Find how to display only students from that section. $students = Student::where('section_id', )
+        return view('schoolclass.addstudents')->with('schoolclass', $schoolclass)->with('sections', Section::all())->with('staff', Staff::all())->with('sessions', Sessionsetting::all());
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function storestudent(Request $request, $id)
+    {
+        $schoolclass = Schoolclass::find($id);
+
+        $schoolclass->name = $request->name;
+        $schoolclass->save();
+        $schoolclass->students()->attach($request->students);
+        Session::flash('success', 'You have added new students to '. $schoolclass->name);
+        return redirect()->route('schoolclass.show', ['id' => $schoolclass->id ]);
     }
 }

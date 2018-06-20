@@ -38,6 +38,27 @@
                                 @endif
                             </div>
                         </div>
+                        
+                        <div class="form-group row">
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">Phone Number</label>
+
+                            <div class="col-md-6">
+                                <input type="tel" name="phone" id="" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="type" class="col-md-4 col-form-label text-md-right">User Type</label>
+
+                            <div class="col-md-6">
+                                <select name="type" id="" class="form-control">
+                                <option value="" selected>Choose user type....</option>
+                                <option value="admin">Admin</option>
+                                <option value="parent">Parent</option>
+                                <option value="staff">Staff</option>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

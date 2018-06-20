@@ -18,7 +18,7 @@ class CreateSchoolclassesTable extends Migration
             $table->integer('section_id');
             $table->string('name');
             $table->integer('session_id');
-            $table->integer('teacher_id');
+            $table->integer('teacher_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -24,7 +24,7 @@
                             <select name="head" class="form-control" id="">
                             <option value="Select Section head"></option>
                             @if($section->head)
-                            <option value="{{$section->head}}">{{$section->head}}</option>
+                            <option value="{{$section->head}}" selected>{{$section->head}}</option>
                             @else
                             <option value="">Choose Section head</option>
                             @endif

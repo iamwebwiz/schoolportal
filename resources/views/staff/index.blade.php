@@ -37,7 +37,7 @@
                         <td>
                         <ul class="list-group">
                         @foreach($staff->sections as $section)
-                        <li class="list-group-item">
+                        <li class="list-group-item list-background">
                         {{$section->name}}</li>
                         @endforeach
                         </ul></td>

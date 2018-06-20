@@ -6,6 +6,8 @@ use Session;
 use App\Staff;
 use App\Sponsors;
 use App\Section;
+use App\User;
+use App\Schoolclass;
 use Illuminate\Http\Request;
 
 class StaffController extends Controller
@@ -18,8 +20,9 @@ class StaffController extends Controller
     public function index()
     {
         $staff = Staff::orderBy('fullName', 'asc')->get();
+        $user = User::where('privliedge', 'staff');
 
-        return view('staff.index')->with('staff', $staff)->with('sections', Section::orderBy('id', 'asc')->get());
+        return view('staff.index')->with('staff', $staff)->with('sections', Section::orderBy('id', 'asc')->get())->with('users', $user);
     }
 
     /**
@@ -36,7 +39,9 @@ class StaffController extends Controller
             return redirect()->back();
         }
 
-        return view('staff.create')->with('sections', Section::all());
+        
+        $user = User::where('priviledge', 'staff')->get();
+        return view('staff.create')->with('sections', Section::all())->with('users', $user);
     }
 
     /**
@@ -107,7 +112,9 @@ class StaffController extends Controller
     public function show($id)
     {
         $staff = Staff::find($id);
-        return view('staff.show')->with('staff', $staff)->with('sections', Section::all());
+        $user = User::where('privliedge', 'staff');
+        $class = Schoolclass::all();
+        return view('staff.show')->with('staff', $staff)->with('sections', Section::all())->with('users', $user)->with('classes', $class);
     }
 
     /**

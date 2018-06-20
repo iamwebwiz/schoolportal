@@ -93,19 +93,8 @@
                             <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Subjects</a></li>
                             <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
                         </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Users</a>
-                        <ul class="sub-menu children dropdown-menu">
-                        
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ route('sections.index')}}">Sections</a></li>
-
-                            
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ route('sessions.index')}}">Sessions</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('schoolclass.index')}}">Classes</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Subjects</a></li>
-                            <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
-                        </ul>
+                    </li><a href="{{route('users.index')}}">
+                    <li class="menu-item menu-icon fa fa-sign-in"> <i class="menu-icon fa fa-glass"></i> Users</a> 
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Accounts</a>

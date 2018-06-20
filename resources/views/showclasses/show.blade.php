@@ -59,11 +59,7 @@
                     <p>Class :</p>
                 </div>
                 <div class="col-md-8 detail-display">
-                <p>
-                @foreach($classes as $class)
-                    <a href="{{route('schoolclass.show', ['id'=>$class->id])}}">{{$class->name}}</a>
-                @endforeach
-                </p>
+                <p>Class handled</p>
                 </div>
             </div>
         @else
@@ -85,11 +81,7 @@
                                     @endif
                                     <h5 class="text-sm-center mt-2 mb-1">{{$staff->fullName}}</h5>
                                     <div class="location text-sm-center"><i class="fa fa-user"></i>({{$staff->gender}}) {{$staff->designation}} - <i>{{$staff->status}}</i> <br>
-                                    @foreach($staff->sections as $section)
-                                    <a href="{{route('sections.show', ['id'=>$section->id])}}">
-                                    {{$section->name}} <br>
-                                    </a>
-                                    @endforeach
+                                    {{$staff->section}}
                                     </div>
                                 </div>
                                 <hr>

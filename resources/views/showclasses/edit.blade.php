@@ -21,7 +21,6 @@
                 <label for="user">User</label>
                 <select id="user" class="form-control" name="user">
                     <option selected value="0">Choose User...</option>
-                    
                 </select>
                 </div>
             </div>    
@@ -112,7 +111,7 @@
             </div>
             <div class="form-row">
             <div class="col-md-12 form-control">
-            <button type="submit" class="btn btn-primary btn-block">Update staff detail</button>
+            <button type="submit" class="btn btn-primary btn-block">Edit</button>
             </div>
             </div>
             </form>

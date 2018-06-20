@@ -15,26 +15,34 @@ class UsersTableSeeder extends Seeder
             'name' => 'Olu Ajayi',
             'password' => bcrypt('admin'),
             'email' => 'olu@me.com',
-            'status' => 'admin'
+            'phone'=> '08080994031',
+            'type' => 'admin',
+            'priviledge' => 'admin'
         ]);
 
         App\User::create([
             'name' => 'Arnold Babatunde',
             'password' => bcrypt('teacher'),
             'email' => 'arnold@me.com',
-            'status' => 'teacher'
+            'phone'=> '08080994032',
+            'type' => 'teacher',
+            'priviledge' => 'teacher'
         ]);
         App\User::create([
             'name' => 'Karl Egbon',
             'password' => bcrypt('account'),
             'email' => 'karl@me.com',
-            'status' => 'account'
+            'phone'=> '08080994033',
+            'type' => 'account',
+            'priviledge' => 'account'
         ]);
         App\User::create([
             'name' => 'Emily Adewale',
             'password' => bcrypt('parent'),
             'email' => 'emily@me.com',
-            'status' => 'parent'
+            'phone'=> '08080994034',
+            'type' => 'parent',
+            'priviledge' => 'parent'
         ]);
     }
 }
