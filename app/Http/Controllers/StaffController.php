@@ -126,7 +126,8 @@ class StaffController extends Controller
     public function edit($id)
     {
         $staff = Staff::find($id);
-        return view('staff.edit')->with('staff', $staff)->with('sections', Section::all());
+        $user = User::where('priviledge', 'staff')->get();
+        return view('staff.edit')->with('staff', $staff)->with('sections', Section::all())->with('users', $user);
     }
 
     /**

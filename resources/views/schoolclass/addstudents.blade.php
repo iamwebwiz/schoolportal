@@ -20,7 +20,7 @@
             <table id="bootstrap-data-table" class="table table-striped table-bordered">
             <thead>
                       <tr>
-                        <th>Student Id</th>
+                        <th></th>
                         <th>Student full Name</th>
                       </tr>
                     </thead>
@@ -30,7 +30,7 @@
             </form>
         </div>
         <div class="col-md-2">
-        <input type="button" value="Get Values" class="btn btn-info" id="submit1" />
+        <input type="button" value="Add Row" class="btn btn-info" id="submit1" />
         </div>
     </div>
 
@@ -39,21 +39,23 @@
 
 
 @section('page-title')
-    Add students to {{$schoolclass->section->name}} - {{$schoolclass->name}}
+    Add students to {{$schoolclass->session->session}} - {{$schoolclass->name}}
 @endsection
 
 
 
     
 @section('scripts')
+    <script type="text/javascript">
     $("#submit1").click(function () {
             {
                 var selected = $('.limitedNumbChosen :selected');
             selected.each(function (a) {
-                    $('#bootstrap-data-table').append('<tr><td><input type="disabled" class="form-control" value="'+$(this).val() +'" name="students[]"></td><td>'+$(this).text() +'</td></tr>');
+                    $('#bootstrap-data-table').append('<tr><td><input type="hidden" class="form-control" value="'+$(this).val() +'" name="students[]"></td><td>'+$(this).text() +'</td></tr>');
                 // $('#table1').append('<tr><td>'+$(this).text()+'</td></tr>');
                 //if you need ah text like days do with that
                 });
             }
         });
+        </script>
 @endsection

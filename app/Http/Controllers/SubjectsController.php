@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Session;
+use App\Subject;
+use App\Schoolclass;
+use App\Sessionsetting;
+use App\Section;
 use Illuminate\Http\Request;
 
 class SubjectsController extends Controller
@@ -23,7 +28,6 @@ class SubjectsController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -34,7 +38,33 @@ class SubjectsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $subjects = array();
+        $subjects = $request->subjects;
+        $staff = $request->staffs;
+
+
+         if(count($subjects) > count($staff)) {
+            $count = count($staff);
+        }
+        else {$count = count($subjects);}
+
+           $count = count($subjects);
+
+        for($i = 0; $i < $count ; $i++ ){
+            $subject = new Subject();
+                        $subject->schoolclass_id = $request->schoolclass_id;
+                        $subject->name = $subjects[$i];
+                        $subject->staff_id = $staff[$i];
+            $subject->save();
+            $subject->staff()->attach($staff[$i]);
+        }
+
+
+            Session::flash('success', 'Subjects added to Class');
+        return redirect()->route('schoolclass.show', ['id' => $request->schoolclass_id ]);
+
+      
+        
     }
 
     /**
@@ -79,6 +109,13 @@ class SubjectsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subject = Subject::find($id);
+        $subject->delete();
+        
+        $subject->staff()->detach($subject);
+
+        Session::flash('success', 'Subject removed from Class');
+
+        return redirect()->back();
     }
 }

@@ -33,10 +33,36 @@ Route::group(['middleware'=>'auth'], function() {
         'uses' => 'SchoolclassesController@storestudent',
         'as' => 'schoolclass.storestudents'
     ]); 
+    Route::delete('/schoolclass/removestudent/{id}', [
+        'uses' => 'SchoolclassesController@removestudent',
+        'as' => 'schoolclass.removestudent'
+    ]); 
+    
+    Route::get('/schoolclass/addsubjects/{id}', [
+        'uses' => 'SchoolclassesController@addsubject',
+        'as' => 'schoolclass.addsubjects'
+    ]);
+    
+    Route::get('/schoolclass/addbooks/{id}', [
+        'uses' => 'SchoolclassesController@addbook',
+        'as' => 'schoolclass.addbooks'
+    ]);
+    
+    Route::get('/schoolclass/addattendance/{id}', [
+        'uses' => 'SchoolclassesController@addattendance',
+        'as' => 'schoolclass.addattendance'
+    ]);
+
+    Route::get('/schoolclass/addassignment/{id}', [
+        'uses' => 'SchoolclassesController@addassignment',
+        'as' => 'schoolclass.addassignment'
+    ]);
     Route::resource('schoolclass', 'SchoolclassesController');
     Route::resource('books', 'BooksController');
     Route::resource('subjects', 'SubjectsController');
     Route::resource('sessions', 'SessionsettingsController');
     Route::resource('users', 'UsersController');
+    Route::resource('assignment', 'AssignmentsController');
+    Route::resource('attendance', 'AttendanceController');
 });
 

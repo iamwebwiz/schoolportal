@@ -9,6 +9,7 @@ use App\Staff;
 use App\Setting;
 use App\Sessionsetting;
 use App\Student;
+use App\Subject;
 
 use Illuminate\Http\Request;
 
@@ -157,11 +158,40 @@ class SchoolclassesController extends Controller
         return view('schoolclass.addstudents')->with('schoolclass', $schoolclass)->with('sections', Section::all())->with('staff', Staff::all())->with('sessions', Sessionsetting::all())->with('students', Student::all());
     }
     
-    public function addsubjects($id)
+    public function addsubject($id)
     {
         $schoolclass = Schoolclass::find($id);
-       // Find how to display only students from that section. $students = Student::where('section_id', )
-        return view('schoolclass.addstudents')->with('schoolclass', $schoolclass)->with('sections', Section::all())->with('staff', Staff::all())->with('sessions', Sessionsetting::all());
+        
+        $staff = Staff::where([
+            ['staffType', 'staff'],
+            ['status', 'active'],
+            ])->get();
+
+
+        return view('schoolclass.addsubjects')->with('schoolclass', $schoolclass)->with('sections', Section::all())->with('staff', $staff)->with('sessions', Sessionsetting::all());
+    } 
+
+
+    public function addbook($id)
+    {
+        $schoolclass = Schoolclass::find($id);
+        
+        return view('schoolclass.addbooks')->with('schoolclass', $schoolclass)->with('sections', Section::all())->with('sessions', Sessionsetting::all());
+    }
+
+
+    public function addattendance($id)
+    {
+        $schoolclass = Schoolclass::find($id);
+        
+        return view('schoolclass.addattendance')->with('schoolclass', $schoolclass)->with('sections', Section::all())->with('sessions', Sessionsetting::all())->with('students', Student::all());
+    }
+
+    public function addassignment($id)
+    {
+        $schoolclass = Schoolclass::find($id);
+        
+        return view('schoolclass.addassignment')->with('schoolclass', $schoolclass)->with('sections', Section::all())->with('sessions', Sessionsetting::all())->with('students', Student::all())->with('subjects', Subject::all());
     }
 
     /**
@@ -179,5 +209,15 @@ class SchoolclassesController extends Controller
         $schoolclass->students()->attach($request->students);
         Session::flash('success', 'You have added new students to '. $schoolclass->name);
         return redirect()->route('schoolclass.show', ['id' => $schoolclass->id ]);
+    }
+
+    public function removestudent(Request $request, $id) {
+        $schoolclass = Schoolclass::find($id);
+        
+        $schoolclass->students()->detach($request->student);
+
+        Session::flash('success', 'Student removed from Class');
+
+        return redirect()->back();
     }
 }

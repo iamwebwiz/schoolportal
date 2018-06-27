@@ -20,8 +20,11 @@
                 <div class="form-group col-md-12">
                 <label for="user">User</label>
                 <select id="user" class="form-control" name="user">
-                    <option selected value="0">Choose User...</option>
+                    <option selected value="{{$staff->user_id or 0}}">{{$staff->users->name or "Choose User..."}}</option>
+                    @foreach($users as $user)
+                        <option value="{{$user->id}}">{{$user->name}}</option>
                     
+                    @endforeach                    
                 </select>
                 </div>
             </div>    

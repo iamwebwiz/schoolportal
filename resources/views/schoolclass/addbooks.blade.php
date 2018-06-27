@@ -9,36 +9,34 @@
         <form>
         <div class="row">
         <div class="col-md-6">
-        <input type="text" id="name" placeholder="Subject" class="form-control">
+        <input type="text" id="name" placeholder="Book Name" class="form-control">
         </div>
         {{--  <input type="text" id="staff" placeholder="Email Address" name="staff">  --}}
         
-        <div class="col-md-6">
-        <select class="form-control" id="staff">
-                <option value=""selected>Choose Staff</option>
-                    @foreach($staff as $staff)
-                <option value="{{$staff->id}}">{{$staff->fullName}}</option>
-                @endforeach
-                </select>
+        <div class="col-md-4">
+        <input type="text" class="form-control" name="" id="author" placeholder="Author">
+        </div>
+        
+        <div class="col-md-2">
+        <input type="text" class="form-control" name="" id="price" placeholder="Price">
         </div>
         </div>
     </form>
-    <form action="{{route('subjects.store')}}" method="POST">
+    <form action="{{route('books.store')}}" method="POST">
             {{ csrf_field() }}
-            <input type="hidden" class="form-control" placeholder="class" name="schoolclass_id" value="{{$schoolclass->id}}">
+            <input type="hidden" placeholder="class" name="schoolclass_id" value="{{$schoolclass->id}}">
         <table id="bootstrap-data-table" class="table table-striped table-bordered">
             <thead>
             <tr>
                 <th>Select </br>(to remove)</th>
-                <th>Subject</th>
-                <th>Teacher</th>
+                <th>Book</th>
+                <th>Author</th>
+                <th>Price</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                {{--  <td><input type="checkbox" name="record"></td>
-                <td>Peter Parker</td>
-                <td>peterparker@mail.com</td>  --}}
+
             </tr>
         </tbody>
     </table>
@@ -48,7 +46,7 @@
                 <a class="btn btn-danger btn-xs" id="delete-row">Remove Row</a>        
             </div>
             <div class="col-md-6">
-                <button type="submit" class="btn btn-info" >Add Subjects</button>
+                <button type="submit" class="btn btn-info" >Add Books</button>
             </div>
         </div>
     </form>
@@ -65,7 +63,7 @@
 
 
 @section('page-title')
-    Add subjects to {{$schoolclass->session->session}} - {{$schoolclass->name}}
+    Add books to {{$schoolclass->session->session}} - {{$schoolclass->name}}
 @endsection
 
 
@@ -76,9 +74,9 @@
     $(document).ready(function(){
         $("#add-row").click(function(){
             var name = $("#name").val();
-            var staff = $("#staff :selected").text();
-            var staff_id = $("#staff :selected").val();
-            var markup = "<tr><td><input type='checkbox' name='record'></td><td><input name='subjects[]' class='form-control' readonly value='" + name + "'></td><td><input class='form-control' disabled value='" + staff + "'></td><td><input type='hidden' name='staffs[]' class='form-control' value='" + staff_id + "'></td></tr>";
+            var author = $("#author").val();
+            var price = $("#price").val();
+            var markup = "<tr><td><input type='checkbox' name='record'></td><td><input name='books[]' class='form-control' readonly value='" + name + "'></td><td><input name='authors[]' class='form-control' readonly value='" + author + "'></td><td><input name='price[]' class='form-control' readonly value='" + price + "'></td></tr>";
             $("table tbody").append(markup);
         });
         

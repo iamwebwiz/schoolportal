@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Session;
-use App\Book;
+use App\Attendance;
 use App\Section;
+use App\Student;
+use App\Subject;
 use Illuminate\Http\Request;
 
-class BooksController extends Controller
+class AttendanceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,33 +39,7 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        //$subjects = array();
-        $books = $request->books;
-        $author = $request->authors;
-        $price = $request->price;
-
-
-         if(count($books) > count($author)) {
-            $count = count($author);
-        }
-        else {$count = count($books);}
-
-           $count = count($books);
-
-        for($i = 0; $i < $count ; $i++ ){
-            $book = new Book();
-                        $book->schoolclass_id = $request->schoolclass_id;
-                        $book->book = $books[$i];
-                        $book->author = $author[$i];
-                        $book->price = $price[$i];
-            $book->save();
-        }
-
-
-            Session::flash('success', 'Books added to Class');
-        return redirect()->route('schoolclass.show', ['id' => $request->schoolclass_id ]);
-
-      
+        $attendance = Attendance::all();
         
     }
 
@@ -109,11 +85,6 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-        $book = Book::find($id);
-        $book->delete();
-
-        Session::flash('success', 'Book removed from Class');
-
-        return redirect()->back();
+        //
     }
 }
